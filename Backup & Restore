@@ -1,0 +1,54 @@
+Nama        : I Gde Bayu Priyambada Marayasa
+Kelas       : 18 TI B1
+Nim         : 311810199
+Matakuliah  : Praktikum Perancangan Basis Data
+
+-----------------------------------------------------------
+
+Hal pertama yang dilakukan untuk Backup & Restore Database pada MYSQL
+
+Langkah membuka database melalui TERMINAL/CMD :
+Karena xampp saya berada pada Disk D: , disini saya akan memanggil xampp dengan " D: cd xampp/bin/mysql/mysql -u root " dan akan muncul MariaDB
+
+Langkah selanjutnya :
+1) use databases;
+2) show databases; -> ( nama database : bayupm_311810199 )
+3) show tables; -> ( pilih table yang akan dipilih yaitu : mahasiswa )
+
+-----------------------------------------------------------------------------------
+
+Langkah Penguncian Table:
+MariaDB [bayupm_311810199]> lock table mahasiswa write;
+
+-----------------------------------------------------------------------------------
+
+Langkah Backup Table:
+MariaDB [bayupm_311810199]> select * into outfile 'b_mahasiswa' from mahasiswa;
+Query OK, 3 rows affected (0.070 sec)
+
+MariaDB [bayupm_311810199]> delete from mahasiswa;
+Query OK, 3 rows affected (0.005 sec)
+
+MariaDB [bayupm_311810199]> select * from mahasiswa;
+Empty set (0.000 sec)
+
+-----------------------------------------------------------------------------------
+
+Langkah Load Data Infile Table:
+MariaDB [bayupm_311810199]> select * into outfile 'b_mahasiswa' from mahasiswa;
+
+-----------------------------------------------------------------------------------
+
+Langkah Backup & Restore menggunakan MYSQLDUMP:
+D:\xampp\mysql\bin>mysqldump -u root -p bayupm_311810199 > backup.sql
+
+dilanjut :
+D:\xampp\mysql\bin>mysqldump -u root -p bayupm_311810199 < D:\xampp\mysql\bin\backup.sql
+
+-----------------------------------------------------------------------------------
+
+Langkah Backup & Restore menggunakan PHPMYADMIN:
+-Export:
+    Buka phpmyadmin -> buka nama database ( bayupm_311810199 ) -> pilih Menu Bar ( Export ), lalu pilih GO / Simpan .
+-Import:
+    Buka phpmyadmin -> buka nama database ( bayupm_311810199 ) -> pilih Menu Bar ( Import ), lalu pilih GO / Simpan .
